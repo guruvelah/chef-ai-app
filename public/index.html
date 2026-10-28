@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="chef">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChefAI: smarter cooking with AI</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <div class="logo-icon">🍳</div>
+        <span>ChefAI</span>
+      </a>
+
+      <!-- Search Box -->
+      <div class="search-box-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="global-search" class="search-input" placeholder="Search recipes, ingredients, cuisines..." autocomplete="off">
+      </div>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <button id="saved-recipes-btn" class="hbtn" title="View Saved Recipes">
+          <span>❤️</span>
+          <span>Saved</span>
+          <span id="saved-count" style="background: var(--accent); color: #fff; font-size: 0.72rem; padding: 0.1rem 0.45rem; border-radius: var(--radius-full); font-weight: 700;">0</span>
+        </button>
+
+        <!-- Theme Switcher (inspired by mj-shoppingapp.vercel.app) -->
+        <div class="theme-dropdown">
+          <button id="theme-toggle-btn" class="hbtn" type="button" aria-label="Change Color Theme">
+            <span>🎨</span>
+            <span id="theme-label">Chef Classic</span>
+            <span style="font-size: 0.7rem;">▼</span>
+          </button>
+          <div id="theme-menu" class="theme-menu">
+            <div style="padding: 0.35rem 0.65rem; font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Colour Theme</div>
+            <button type="button" class="theme-option active" data-theme="chef">
+              <span class="swatch" style="background: linear-gradient(135deg, #f59e0b, #ea580c);"></span> Chef Classic
+            </button>
+            <button type="button" class="theme-option" data-theme="sunset">
+              <span class="swatch" style="background: linear-gradient(135deg, #f43f5e, #fb923c);"></span> Sunset Glow
+            </button>
+            <button type="button" class="theme-option" data-theme="emerald">
+              <span class="swatch" style="background: linear-gradient(135deg, #10b981, #34d399);"></span> Emerald Herb
+            </button>
+            <button type="button" class="theme-option" data-theme="royal">
+              <span class="swatch" style="background: linear-gradient(135deg, #a855f7, #ec4899);"></span> Royal Plum
+            </button>
+            <button type="button" class="theme-option" data-theme="midnight">
+              <span class="swatch" style="background: linear-gradient(135deg, #38bdf8, #818cf8);"></span> Midnight Slate
+            </button>
+            <button type="button" class="theme-option" data-theme="ocean">
+              <span class="swatch" style="background: linear-gradient(135deg, #0284c7, #38bdf8);"></span> Ocean Aegean
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Hero Fridge-to-Feast AI Generator -->
+    <section class="hero-section">
+      <div class="hero-banner">
+        <span class="hero-pill">✨ Powered by Intelligent Culinary AI</span>
+        <h1 class="hero-title">Cook Delicious Meals with What You Have</h1>
+        <p class="hero-subtitle">
+          Select what's in your pantry or fridge, and ChefAI will match or generate a personalized gourmet recipe with zero food waste.
+        </p>
+
+        <div class="fridge-box">
+          <div class="fridge-label">
+            <span>What's in your kitchen today? Tap to select:</span>
+            <span style="font-size: 0.75rem; color: var(--accent);">Zero-Waste Engine</span>
+          </div>
+
+          <div class="ingredient-tags">
+            <span class="ing-tag" data-ing="eggs">🥚 Eggs</span>
+            <span class="ing-tag" data-ing="garlic">🧄 Garlic</span>
+            <span class="ing-tag" data-ing="salmon">🐟 Salmon</span>
+            <span class="ing-tag" data-ing="spinach">🥬 Spinach</span>
+            <span class="ing-tag" data-ing="pasta">🍝 Pasta</span>
+            <span class="ing-tag" data-ing="avocado">🥑 Avocado</span>
+            <span class="ing-tag" data-ing="tofu">🧈 Tofu</span>
+            <span class="ing-tag" data-ing="chicken">🍗 Chicken</span>
+            <span class="ing-tag" data-ing="tomatoes">🍅 Tomatoes</span>
+            <span class="ing-tag" data-ing="cheese">🧀 Cheese</span>
+          </div>
+
+          <div class="fridge-actions">
+            <input type="text" id="fridge-custom-input" class="fridge-input" placeholder="Type other ingredients (e.g. broccoli, mushrooms, lemon)...">
+            <button id="generate-ai-recipe-btn" class="hbtn hbtn-primary">
+              <span>✨</span> Cook with My Fridge
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <button class="chip-btn active" data-cat="All">All Recipes</button>
+      <button class="chip-btn" data-cat="High Protein">💪 High Protein</button>
+      <button class="chip-btn" data-cat="Quick">⚡ Under 20 Mins</button>
+      <button class="chip-btn" data-cat="Vegetarian">🌱 Vegetarian</button>
+      <button class="chip-btn" data-cat="Low Carb">🥑 Low Carb</button>
+      <button class="chip-btn" data-cat="Italian">🍕 Italian</button>
+      <button class="chip-btn" data-cat="Asian">🍜 Asian</button>
+      <button class="chip-btn" data-cat="Dessert">🍰 Dessert</button>
+    </div>
+
+    <!-- Recipes Grid -->
+    <section>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h2 id="section-heading" style="font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em;">Chef-Selected Recipes</h2>
+      </div>
+      <div id="recipes-grid" class="recipes-grid"></div>
+    </section>
+  </main>
+
+  <!-- Interactive Cooking Mode Modal -->
+  <div id="cooking-modal-overlay" class="modal-overlay">
+    <div class="cooking-modal">
+      <button id="modal-close-btn" class="modal-close-btn" aria-label="Close Modal">&times;</button>
+      <img id="modal-img" src="" alt="Recipe Image" class="modal-header-img">
+
+      <div class="modal-content-inner">
+        <div id="modal-cat" style="font-size: 0.8rem; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-bottom: 0.35rem;"></div>
+        <h2 id="modal-title" style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; line-height: 1.25;"></h2>
+        <p id="modal-desc" style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.25rem;"></p>
+
+        <div id="modal-ai-tip" style="display: none; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: var(--radius-sm); padding: 0.75rem 1rem; font-size: 0.88rem; color: #fbbf24; margin-bottom: 1.25rem;"></div>
+
+        <!-- Macros Grid -->
+        <div class="macros-row" style="font-size: 0.85rem; padding: 0.65rem 1rem;">
+          <span>Calories: <strong id="macro-cal">--</strong></span>
+          <span>Protein: <strong id="macro-pro">--</strong></span>
+          <span>Carbs: <strong id="macro-carb">--</strong></span>
+          <span>Fat: <strong id="macro-fat">--</strong></span>
+        </div>
+
+        <!-- Live Kitchen Countdown Timer -->
+        <div class="timer-card">
+          <div>
+            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Live Kitchen Timer</div>
+            <div id="timer-display" class="timer-digits">20:00</div>
+          </div>
+          <div class="timer-btns">
+            <button id="timer-start-btn" class="hbtn hbtn-primary">▶ Start</button>
+            <button id="timer-pause-btn" class="hbtn">⏸ Pause</button>
+            <button id="timer-reset-btn" class="hbtn">🔄 Reset</button>
+          </div>
+        </div>
+
+        <!-- Ingredients Checklist -->
+        <div style="margin: 1.75rem 0;">
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">📋 Ingredients Checklist <span style="font-size: 0.8rem; font-weight: 400; color: var(--text-muted);">(Click to check off as you prep)</span></h3>
+          <div id="modal-ingredients-list"></div>
+        </div>
+
+        <!-- Step by Step Instructions -->
+        <div style="margin-top: 1.75rem;">
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem;">🍳 Step-by-Step Cooking Guide</h3>
+          <div id="modal-steps-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--border); padding: 2.5rem 0; margin-top: 4rem; background: rgba(0,0,0,0.2);">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <p style="font-size: 0.88rem; color: var(--text-muted);">
+        &copy; 2026 <strong>ChefAI</strong>. Built with Express, Web Audio Chime, and Multi-Theme Design System.
+      </p>
+      <div style="display: flex; gap: 1rem; font-size: 0.88rem;">
+        <span style="color: var(--text-secondary);">Zero-Waste Cooking</span>
+        <span style="color: var(--text-secondary);">&bull;</span>
+        <span style="color: var(--text-secondary);">Interactive Timers</span>
+        <span style="color: var(--text-secondary);">&bull;</span>
+        <span style="color: var(--text-secondary);">Smart Pantry Matcher</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Integrated AI Assistant -->
+  <div id="ai-assistant-widget" class="ai-assistant-widget">
+    <button id="ai-chat-toggle-btn" class="ai-chat-toggle-btn" title="Open AI Chef Assistant">
+      <span style="font-size: 1.3rem;">💬</span>
+      <span class="chat-btn-text">Ask Chef AI</span>
+    </button>
+
+    <div id="ai-chat-drawer" class="ai-chat-drawer hidden">
+      <div class="ai-chat-header">
+        <div style="display: flex; align-items: center; gap: 0.65rem;">
+          <div style="font-size: 1.5rem;">👨‍🍳</div>
+          <div>
+            <h4 style="font-size: 0.95rem; font-weight: 700;">Chef AI Assistant</h4>
+            <span style="font-size: 0.72rem; color: #34d399; display: flex; align-items: center; gap: 0.35rem;">
+              <span style="width: 7px; height: 7px; background: #10b981; border-radius: 50%; display: inline-block;"></span> Online &bull; Culinary Advice
+            </span>
+          </div>
+        </div>
+        <button id="ai-chat-close-btn" style="background: transparent; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer;">&times;</button>
+      </div>
+
+      <div class="ai-chat-chips">
+        <button class="ai-quick-btn" data-q="What can I substitute for heavy cream?">Substitute for cream?</button>
+        <button class="ai-quick-btn" data-q="How do I cook salmon with crispy skin?">Crispy salmon tip?</button>
+        <button class="ai-quick-btn" data-q="How do I get ultra crispy tofu?">Crispy tofu?</button>
+      </div>
+
+      <div id="ai-chat-messages" class="ai-chat-messages">
+        <div class="ai-msg ai-msg-bot">
+          <div class="msg-bubble">
+            Bonjour! I am your <strong>Chef AI Assistant</strong>. Ask me anything about cooking techniques, ingredient substitutions, recipe tips, or how to use ChefAI!
+          </div>
+        </div>
+      </div>
+
+      <form id="ai-chat-form" class="ai-chat-form">
+        <input type="text" id="ai-chat-input" class="ai-chat-input" placeholder="Ask about recipes, substitutions, tips..." required autocomplete="off">
+        <button type="submit" class="ai-chat-send-btn">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

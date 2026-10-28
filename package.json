@@ -1,0 +1,15 @@
+{
+  "name": "chef-ai-app",
+  "version": "1.0.0",
+  "description": "ChefAI: Smarter Cooking with AI - Smart recipe matcher, pantry assistant, interactive cooking mode, and multi-theme design system",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "author": "Guruvelah A S",
+  "license": "MIT"
+}
